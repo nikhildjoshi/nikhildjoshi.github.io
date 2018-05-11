@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<title>Dynamic Web · N I K H I L J O S H I</title>
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:title" content="Dynamic Web" />
+<meta name="twitter:description" content="Distributing web workload evenly">
+
+<meta name="description" content="Distributing web workload evenly">
+
+
+	<meta name="google-site-verification" content="epFgX0s_0RM3CdjwFcsewfXzPov2g8s9ZBOLyaIUH-o">
+
+
+<link rel="icon" href="http://localhost:4000/assets/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:4000/assets/touch-icon.png">
+<link rel="stylesheet" href="http://localhost:4000/assets/core.css">
+<link rel="canonical" href="http://localhost:4000/notes/dynamic-web">
+<link rel="alternate" type="application/atom+xml" title="N I K H I L J O S H I" href="http://localhost:4000/feed.xml" />
+
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+	</head>
+
+	<body>
+
+		<aside class="logo">
+
+	
+	<a href="/" style ="border:none;">
+		<img src="/assets/banner.png" style="">
+	</a>
+</aside>
+
+		<main>
+			<article>
+
+	<div class="center">
+		<h1 class="title">Dynamic Web</h1>
+		<time>December 10, 2016</time>
+	</div>
+
+	<div class="divider"></div>
+
+	<h6 id="distributing-web-workload-evenly">Distributing web workload evenly</h6>
+
+<p>Just a thought, why is it that pages that load on the browser in modern days
+are so slow ? Well multiple reasons…</p>
+
+<p>In this post, I will talk about some reasons that I think slow down page perf
+.</p>
+
+<h6 id="http-archive">HTTP Archive</h6>
+<p>This is probably the biggest site to understand the distribtion of content,
+its bandwidth consumption, and its effect on page load time. Here is a description of
+bandwidth run for mobiles for 2018.
+<img src="http://chart.googleapis.com/chart?chs=400x225&amp;cht=p&amp;chco=007099&amp;chd=t:604,47,46,322,30,578&amp;chds=0,604&amp;chdlp=b&amp;chdl=total%201629%20kB&amp;chl=Images+-+604+kB%7CHTML+-+47+kB%7CStylesheets+-+46+kB%7CScripts+-+322+kB%7CFonts+-+30+kB%7CVideo+-+578+kB&amp;chma=|5&amp;chtt=Average+Bytes+per+Page+by+Content+Type" /></p>
+
+<p>This is just a small example, the site has lots of good things.</p>
+
+<h6 id="computing-on-the-client-side">Computing on the client side.</h6>
+
+<p>The problem of loading a web page can be distilled into two parts. First, a network
+constricted resource fetch operation, and second, a compute constricted compute operation.</p>
+
+<p>Web pages designed in the western world, do not represent the average b/w or compute power
+of people in this world. Therefore for the web to scale, we need newer methods, perhaps, newer
+more decentralized architectures.</p>
+
+<p>The only way to forever solve this problem is to design web pages by taking into consideration the bandwidth of the user( estimating b/w of the end user is a problem in its own right), there could even be a grade of features and things enabled or disabled based on real time statistics for the given user (this for example is typically done on a video quality degradation).</p>
+
+<p>There are other stop gap solutions, that try to optimize certain aspects of trying to load a page. for example, A data compressing proxy can be used to reduce the strain on end user b/w. Something like a REACT js can be used to more or less stream the changes to the screen, this improves the end user experience, but isn’t that much great on b/w consumption etc etc…</p>
+
+<p>There might still be some scope for translating a given page and its resources based on the end user bandwidth and compute powers on the fly.</p>
+
+
+</article>
+<!--
+<div class="page-navigation">
+	
+    <a class="next" href="http://localhost:4000/notes/aluminium-flash-powder" title="NEXT: Aluminium Flash Powder">&lt;&lt;</a>
+		<span> &middot; </span>
+  
+		<a class="home" href="http://localhost:4000" title="Back to Homepage">Home</a>
+  
+		<span> &middot; </span>
+    <a class="prev" href="http://localhost:4000/notes/nitrates" title="PREV: Nitrates">&gt;&gt;</a>
+  
+</div>
+-->
+
+		</main>
+		<div class="footer">
+  <span class="block">&copy; 2018 Nikhil Joshi</span>
+  <span class="block"><small><small>Life is largely random, don't take it too seriously</small></small></span>
+</div>
+
+
+	</body>
+
+</html>

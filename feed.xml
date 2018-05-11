@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>N I K H I L J O S H I</title>
+    <description>Just some random thoughts about my work and experiments</description>
+    <link>http://localhost:4000</link>
+    
+      
+        <item>
+          <title>Aluminium Flash Powder</title>
+          <description>&lt;p&gt;&lt;strong&gt;Back on subject of fireworks&lt;/strong&gt;, now that I am pretty much done with gunpowder and rocket candies, now its time for another firework trick mixture, “flash powder”. A flash powder is a mixture of oxidizer and a fuel, just like gunpowder or rocket candy. The reason its called &lt;strong&gt;flash powder&lt;/strong&gt; is because it burns more vigirously and produces a bright flash.&lt;/p&gt;
+
+&lt;h6 id=&quot;history&quot;&gt;History&lt;/h6&gt;
+
+&lt;p&gt;The original application of flash powders was in photography. Since there weren’t halogens or any other powerfull sources of light, the effect was produced by actually burning flash powders in order to create the flash.&lt;/p&gt;
+
+&lt;h6 id=&quot;ruminations&quot;&gt;Ruminations&lt;/h6&gt;
+
+&lt;p&gt;I know from my middle school that magnesium burns pretty bright, that was the first thing that came to my mind, and sure enough, magnesium is definitely one of the major ingredients in flash powder, its costly though :). Since I am not doing anything serious, and I am not going to become a proffessional pyrotechnic, I am contended with doing simple cheap alternatives.&lt;/p&gt;
+
+&lt;p&gt;I will be using &lt;strong&gt;aluminium&lt;/strong&gt;. I had no clue that finely powdered aluminium is actually a fuel that burns almost like charcoal! Nay, better than charcoal, it supposedly can sponteneously ignite at lower tempratures than charcoal.&lt;/p&gt;
+
+&lt;p&gt;Some surprises here, in my view , I had thought for the longest time that metals don’t burn except at a very high temprature.. T_T. Looks like metals when their size is small enough act almost like a &quot; sponge &quot; that captures and either adds to, or multiplies the heat absorbed from outside and somehow reaches ignition tempratures, for example iron burns at 816 degree C, but, I have seen iron wool burn with a matchstick.&lt;/p&gt;
+
+&lt;p&gt;Similarly aluminium burns at 600 degree C.&lt;/p&gt;
+
+&lt;p&gt;Alright, so I am going to combine some coal, aluminium and some nitrate. I hope to get atleast some flash out of this.&lt;/p&gt;
+
+&lt;h6 id=&quot;metals-as-fuels-&quot;&gt;Metals as fuels ?&lt;/h6&gt;
+
+&lt;h6 id=&quot;experiment&quot;&gt;Experiment&lt;/h6&gt;
+
+&lt;p&gt;I took some coal nitrate and aluminium. Firstly I took them in proportions of 70, 25, 5. 5 being aluminium. And sure enough, it does throw up bright sparks in between coal sparks. It appears quite beautiful.&lt;/p&gt;
+
+&lt;p&gt;I tried a second mixture, with ratios 60, 10, 30. And this is quite bright, but doesn’t burn compltely.&lt;/p&gt;
+
+&lt;h6 id=&quot;bonus-composition--thermite&quot;&gt;Bonus composition : Thermite&lt;/h6&gt;
+
+&lt;p&gt;Thermite is as a composition is perhaps the best in terms of heat production. This simple mixture is made up of rust of Iron (Fe2O3, Fe2O5 etc) and aluminium. A finely powedered mixture of rust and aluminium can be mixed together througly, and after application of some energy, the oxygen from the iron transfers to the more unstable aluminium. The reaction is highly exothermic, and tempratures enough to melt iron is generated.&lt;/p&gt;
+
+&lt;p&gt;This technique is so effective in generating molten iron, that this is used to weld train tracks! For reference train tracks are atleast 15cm by 5cm.&lt;/p&gt;
+&lt;h6 id=&quot;observations&quot;&gt;Observations&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Looks like to burn aluminium properly, you first need some charcoal based fire, that reaches the burning point of aluminium, and then they all vigirously burn and support each other.&lt;/li&gt;
+  &lt;li&gt;A small amount of aluminium will throw up bright yellow-white sparks in between the more dimmer reddish coal sparks.&lt;/li&gt;
+  &lt;li&gt;Recording this behavior is somewhat of a nightmare due to auto adjusting brightness of all modern cameras.&lt;/li&gt;
+  &lt;li&gt;You will be able to feel the temprature difference if you burn a metal fuel (mostly aluminium).&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+          <pubDate>2016-12-20T00:00:00+00:00</pubDate>
+          <link>http://localhost:4000/notes/aluminium-flash-powder</link>
+          <guid isPermaLink="true">http://localhost:4000/notes/aluminium-flash-powder</guid>
+        </item>
+      
+    
+      
+        <item>
+          <title>Dynamic Web</title>
+          <description>&lt;h6 id=&quot;distributing-web-workload-evenly&quot;&gt;Distributing web workload evenly&lt;/h6&gt;
+
+&lt;p&gt;Just a thought, why is it that pages that load on the browser in modern days
+are so slow ? Well multiple reasons…&lt;/p&gt;
+
+&lt;p&gt;In this post, I will talk about some reasons that I think slow down page perf
+.&lt;/p&gt;
+
+&lt;h6 id=&quot;http-archive&quot;&gt;HTTP Archive&lt;/h6&gt;
+&lt;p&gt;This is probably the biggest site to understand the distribtion of content,
+its bandwidth consumption, and its effect on page load time. Here is a description of
+bandwidth run for mobiles for 2018.
+&lt;img src=&quot;http://chart.googleapis.com/chart?chs=400x225&amp;amp;cht=p&amp;amp;chco=007099&amp;amp;chd=t:604,47,46,322,30,578&amp;amp;chds=0,604&amp;amp;chdlp=b&amp;amp;chdl=total%201629%20kB&amp;amp;chl=Images+-+604+kB%7CHTML+-+47+kB%7CStylesheets+-+46+kB%7CScripts+-+322+kB%7CFonts+-+30+kB%7CVideo+-+578+kB&amp;amp;chma=|5&amp;amp;chtt=Average+Bytes+per+Page+by+Content+Type&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is just a small example, the site has lots of good things.&lt;/p&gt;
+
+&lt;h6 id=&quot;computing-on-the-client-side&quot;&gt;Computing on the client side.&lt;/h6&gt;
+
+&lt;p&gt;The problem of loading a web page can be distilled into two parts. First, a network
+constricted resource fetch operation, and second, a compute constricted compute operation.&lt;/p&gt;
+
+&lt;p&gt;Web pages designed in the western world, do not represent the average b/w or compute power
+of people in this world. Therefore for the web to scale, we need newer methods, perhaps, newer
+more decentralized architectures.&lt;/p&gt;
+
+&lt;p&gt;The only way to forever solve this problem is to design web pages by taking into consideration the bandwidth of the user( estimating b/w of the end user is a problem in its own right), there could even be a grade of features and things enabled or disabled based on real time statistics for the given user (this for example is typically done on a video quality degradation).&lt;/p&gt;
+
+&lt;p&gt;There are other stop gap solutions, that try to optimize certain aspects of trying to load a page. for example, A data compressing proxy can be used to reduce the strain on end user b/w. Something like a REACT js can be used to more or less stream the changes to the screen, this improves the end user experience, but isn’t that much great on b/w consumption etc etc…&lt;/p&gt;
+
+&lt;p&gt;There might still be some scope for translating a given page and its resources based on the end user bandwidth and compute powers on the fly.&lt;/p&gt;
+</description>
+          <pubDate>2016-12-10T00:00:00+00:00</pubDate>
+          <link>http://localhost:4000/notes/dynamic-web</link>
+          <guid isPermaLink="true">http://localhost:4000/notes/dynamic-web</guid>
+        </item>
+      
+    
+      
+        <item>
+          <title>Nitrates</title>
+          <description>&lt;p&gt;&lt;strong&gt;Nitrates&lt;/strong&gt; the oxidizer that we saw last post, is the main ingredient of gunpowder.
+But now questions is how to produce this ? Or rather how did people produce this in history , and can we produce it ? This post contains some information regarding my information gathering for producing Pottasium nitrate…&lt;/p&gt;
+
+&lt;p&gt;In ancient China, and India, it was produced by harvesting the marshy clay and purifying it, add water, then boil, then add ash of particular high pottasium woods, and then , filter the stuff again. Boil to reduce the water, and then let it cool, see the crystals of Kno3 precipitate. They are needle shaped.&lt;/p&gt;
+
+&lt;p&gt;Ashes of woods contain carbonates of calcium, pottasium etc.. Then clearly those that contain more pottasium will contain more pottasium carbonate (KCO3). The K in the KCO3 is what we are after, and hence the use of wood ash.&lt;/p&gt;
+
+&lt;p&gt;Now, why are there nitrates in marshy lands in the first place ?&lt;/p&gt;
+
+&lt;p&gt;Enter &lt;strong&gt;The Nitrogen Cycle&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h6 id=&quot;nitrogen-cycle&quot;&gt;Nitrogen Cycle.&lt;/h6&gt;
+&lt;p&gt;Nitrogen cycle describes conversion of elemental nitrogen (N2 gas in air) to various compounds of nitrogen, and how nitrogen moves in and out of organic compounds.&lt;/p&gt;
+
+&lt;p&gt;This is a diagram from wikipedia commons, that very succicintly describes the cycle.
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/en/e/e3/The_Nitrogen_Cycle.png&quot; alt=&quot;Nitrogen Cycle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Alright, so the important part for us is the nitrification cycle, as you can see nitrifying bacteria are the bacteria that take amonia as input, and produce nitrites (NO2), then some other bacteria take the nitrite, and produce nitrates (NO3).&lt;/p&gt;
+
+&lt;p&gt;Nitrates(NO3) as you know are the radical that we need to combine with Pottasium (K) to produce the oxidizer Pottasium Nitrates (KNO3).&lt;/p&gt;
+
+&lt;p&gt;The conversion of Amonium or Amonia to nitrite is done by classes of bacteria called “Amonia Oxidizing Bacteria” (AOB). One of these are called &lt;strong&gt;Nitrosomonas&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2.NH4(+) + 3.O2 --&amp;gt; 2.NO2(-) + 2.H2O + 4.H(+) ...[yours truly Nitrosomonas, Comammox]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The conversion of nitrite(NO2) to nitrates(NO3) is done by class of bacteria called Nitrite Oxidizing Bacteria (NOB). One of these are called &lt;strong&gt;Nitrobacter&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2.NO2(−) + O2 --&amp;gt; 2.NO3(-) ...[yours truely,Nitrobacter, Nitrospira, Comammox]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;enough-with-the-theory--how-do-i-do-it-&quot;&gt;Enough with the theory , how do I do it !&lt;/h5&gt;
+
+&lt;p&gt;So by 17th to 18th century, there were multiple production techniques that were developed that created artificial marshy conditions in hope of harnessing whatever ‘magic’ that created the nitrates in natural marshes. And these people were more or less successful in their efforts.&lt;/p&gt;
+
+&lt;p&gt;Alright, so lets think about this, we need as input amonia or amonium thats NH3 or NH4, then, we want as output NO2 and then NO3, alright then, we need oxygen for sure. Turns out, AOBs need CO2 to oxidize NH3/4 to NO2.&lt;/p&gt;
+
+&lt;p&gt;Historical source for amonia was urine, which contains urea(CH4N2O). We then need oxygen (we can get that from air at reasonable rates), and , our friendly bacteria the AOBs , that will take oxygen from air, do their magic, and produce nitrites.&lt;/p&gt;
+
+&lt;p&gt;Our other friends, NOBs will then take this nitrite and then convert it into nitrates.&lt;/p&gt;
+
+&lt;p&gt;Then we will leech(fancy word for dissolving in water, and seperating by flitration) the nitrates from the said mush, and get a solution of nitrates (potentially calcium nitrates). We can then treat it with KCL to get KNo3.&lt;/p&gt;
+
+&lt;h6 id=&quot;todo&quot;&gt;TODO&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Need to get a source of urea/amonia, probably just urine.&lt;/li&gt;
+  &lt;li&gt;Nitrifying bacteria are available as aquarium cleaning aids.&lt;/li&gt;
+  &lt;li&gt;Pottasium is available as Pottasium chloride or Potash.&lt;/li&gt;
+  &lt;li&gt;I always wanted to do some hydroponics experiments, probably I will do this when I am dealing with hydroponics.&lt;/li&gt;
+  &lt;li&gt;It should also be noted that those nitrates in water are probably pottasium nitrates (CaNO3), which when reacted with potash (KCO3) can potentially produce KNO3.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;references&quot;&gt;References&lt;/h6&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Nitrogen_cycle&quot;&gt;Wikipedia : Nitrogen cycle&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Nitrobacter&quot;&gt;Wikipedia : Nitrobacter&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Nitrification&quot;&gt;Wikipedia : Nitrification&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://firearmshistory.blogspot.com/2016/03/the-history-of-saltpeter-iv.html&quot;&gt;Old ways of producing saltpeter&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+          <pubDate>2016-11-15T00:00:00+00:00</pubDate>
+          <link>http://localhost:4000/notes/nitrates</link>
+          <guid isPermaLink="true">http://localhost:4000/notes/nitrates</guid>
+        </item>
+      
+    
+      
+        <item>
+          <title>Gunpowder</title>
+          <description>&lt;p&gt;&lt;strong&gt;Alright&lt;/strong&gt; staying true to my goal, I have some time this week. Read a few things about gunpowder, and fire in general.
+To summarize it quickly, to make fire, we need fuel, oxygen, and some activation energy. Thinking back at my childhood experiences
+this makes sense, almost everytime I have lit fire, those 3 were present.&lt;/p&gt;
+
+&lt;p&gt;The important bit now is how to get oxygen. Oxygen is at ~20% in air, so a burning substance has 8 in 10 chance of not combusting
+becuse of lack of oxygen. So, how do we improve flow of oxygen ? The easiest way is to find chemical compounds that release oxygen
+when they are heated. As we apply the activation energy in the form of fire, this substance will heat, and release additional oxygen
+into the fuel, that will burn the fuel more than if it was burnt only by oxygen in air. This particular set of substances used for
+producing oxygen are called &lt;strong&gt;oxidizers&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Thinking back, I do remember about reading a rocket working principle book, that had oxygen along with fuel in its tanks. Also , I don’t remember ever reading that increasing the amount of oxygen cause more vigirous burning of fuels in my school science texts. Its somewhat dangerous to not teach this.&lt;/p&gt;
+
+&lt;p&gt;Coming back to the topic of oxidizers, apparently pottasium nitrate is the most famous of them all, and most ancient of them all.
+The origin of gunpowder is as is a difficult subject, some people claim it was China, some claim it was India. Well, both of these
+places have large marshy lands, which are primmed for production of nitrates. More on nitrates in a later post. Since there are more proofs that point to Chinese origins, we will go with that.&lt;/p&gt;
+
+&lt;p&gt;For our gunpowder experiment, the general formula is sulphur, charcoal powder, and pottasium nitrate mixed in a 5, 20, 75 ratio. There are a few things to keep in mind, while doing this experiment. First, its related to fire (Agni) so be respectful (alert). Second, we do not want to do any crazy things,&lt;/p&gt;
+
+&lt;p&gt;After getting all the required things , I tested each of the substances individually:&lt;/p&gt;
+&lt;h6 id=&quot;sulphur&quot;&gt;Sulphur&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;Applying a match, it will burn with a blue flame.&lt;/li&gt;
+  &lt;li&gt;Combustion starts at about 400C.&lt;/li&gt;
+  &lt;li&gt;Melts at about 115C.&lt;/li&gt;
+  &lt;li&gt;In case of gunpowder, sulphur plays an important role. It first of all is used to equally spread the heat , so that the oxidizer starts releasing oxygen early in the game, this saturates the air around the mixture with oxygen.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;charcoal&quot;&gt;Charcoal&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;On application of a match, charcoal powder produced some sparks.&lt;/li&gt;
+  &lt;li&gt;Produced by pyrolysis of wood.&lt;/li&gt;
+  &lt;li&gt;Hydrocarbon, with varying formula, but typically C6H10.&lt;/li&gt;
+  &lt;li&gt;Its a hydrocarbon that burns at around 700+ C.&lt;/li&gt;
+  &lt;li&gt;At its max, it can burn at more than 2000+ C.&lt;/li&gt;
+  &lt;li&gt;This is the main fuel for gunpowder, given its high energy content.&lt;/li&gt;
+  &lt;li&gt;It has many micro porus structures, which can soak up other chemicals. for eg. activated charcoal is used to trap chemicals in water.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;pottasium-nitrate-kno3&quot;&gt;Pottasium Nitrate (KNO3)&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;Undoubtedly the MVP of this gunpowder thing…&lt;/li&gt;
+  &lt;li&gt;The Nitrate radicle has 3 oxygen atoms.&lt;/li&gt;
+  &lt;li&gt;These atoms can be released as diatomic oxygen(o2) on application of heat
+at around 500C.&lt;/li&gt;
+  &lt;li&gt;This release of oxygen is what makes it most usefull compound. Such compounds are generally termed &quot;oxidizers&quot;.&lt;/li&gt;
+  &lt;li&gt;This doesn’t burn, melts on application of match, and then converts into a white solids (KCo3)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;bonus-ingredient-sucrose-c6h12o6&quot;&gt;Bonus ingredient Sucrose (C6H12O6)&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;Common house hold sugar is carbohydrate (as opposed to hydrocarbon).
+Carbs conain oxygen atoms also, in addition to C, and H.&lt;/li&gt;
+  &lt;li&gt;It burns at around 300 to 400C, and produces a carbon residue.&lt;/li&gt;
+  &lt;li&gt;It melts at 160C.&lt;/li&gt;
+  &lt;li&gt;Burning of sucrose produces a LOT of high temprature steam.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;principle-of-operation&quot;&gt;Principle of operation&lt;/h6&gt;
+&lt;p&gt;Now that we know how individual ingredients operate, we now simply need to mix them in appropriate proportions. The generally accepted proportions for sulphur : charcoal : nitrate is 15:20:75. This formula has changed quite a bit based on what type wood was used for production of the charcoal.&lt;/p&gt;
+
+&lt;p&gt;Alright, so the way this is supposed to work is, sulphur is the first one to melt and ignite, the heated melted sulphur in turn heats the nitrate, causing decomposition, and release of oxygen, this further builds up the heat, causing more oxygen, untill it ultimately reaches charcoal ignition tempratures, and then things just fly from there onwards.
+Generally accepted simplistic formula is stated as :&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	10.KNO3 + 8.C + 3.S ---&amp;gt; 2.K2CO3 + 3.K2SO4 + 6.CO2 + 5.N2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h6 id=&quot;preparation&quot;&gt;Preparation&lt;/h6&gt;
+&lt;p&gt;Since I want to iterate faster, and there are multiple thing I want to try I will make no more than 5g powder at a time. There are multiple things I need to try, and multiple preparation methods.&lt;/p&gt;
+
+&lt;p&gt;The basic thrust of all preparation methods is to introduce as many KNo3 molecules closer to Charcol molecules as possible. And there have been suggested various methods. I will try three main methods, first a simple mixing using mortar pestle, two, using wet mortal pestle, and three with sugar syrup instead of water.&lt;/p&gt;
+
+&lt;h6 id=&quot;observations&quot;&gt;Observations&lt;/h6&gt;
+&lt;p&gt;Various different 5g powder samples prepared and ignited, here are few key things that I noticed.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Adding sulphur makes very little impact on burn rate.&lt;/li&gt;
+  &lt;li&gt;Method of preparation makes a LOT of impact on burn rate.&lt;/li&gt;
+  &lt;li&gt;Reducing KNO3 quantity doesn’t affect much, if, mixing isn’t done properly, it simply leaves residue, but burn speed isn’t affected that much.&lt;/li&gt;
+  &lt;li&gt;Adding some sugar causes the mixture to become hard and grainy, this causes more air gaps between the mixtures, and that probably cause better burn rate.&lt;/li&gt;
+  &lt;li&gt;Adding sulphur produces a lot more heat than without sulphur.&lt;/li&gt;
+  &lt;li&gt;Shit ton of smoke is produced if sulphur is added. If sulphur is not added, the amount of smoke is less than half of with sulphur(approximation).&lt;/li&gt;
+  &lt;li&gt;Wet grinding is the way to go, just take some water and keep on grinding the mixture a good about 5 mins. Dry it throughly.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;my-best-attempt&quot;&gt;My best attempt&lt;/h6&gt;
+&lt;p&gt;The best mix I obtained was simply Charcoal, Kno3, Sugar in quantities of 30 : 65 : 5, with water grinding. This is safe mixture that doesn’t produce any corrosive gases or anything like it.&lt;/p&gt;
+
+&lt;h6 id=&quot;bonus-composition-rocket-candy&quot;&gt;Bonus composition &quot;Rocket candy&quot;&lt;/h6&gt;
+&lt;p&gt;Alright adding sugar and Kno3 in proportions roughly 50:50 or 40:60. The mixture is prepared by boiling some water with kno3 and sugar, at &lt;strong&gt;VERY LOW HEAT&lt;/strong&gt;. I repeat &lt;strong&gt;VERY LOW HEAT&lt;/strong&gt;. Stop it as soon as it reaches a melted cheese like consistency. Once its stopped, the mix is like a dough, or a molten glass, its hot, and mouldable, just mold it into a shape. When its cold, it is like a candy.&lt;/p&gt;
+
+&lt;p&gt;I did a 10 grams composition, and that stuff produces lots of steam, it also seems to have quite a bit of energy. When I made it burn, it produced some type of motion, so clearly it has energy to propell, hence the name Rocket candy.&lt;/p&gt;
+&lt;h6 id=&quot;in-action&quot;&gt;In action&lt;/h6&gt;
+&lt;table style=&quot;border:2px;&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;dry mixed pottasium nitrate and charcoal powder in ratio of 70 30&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;iframe style=&quot;margin:1px !important; border:1px; display:inline; width:auto;&quot; src=&quot;https://www.youtube-nocookie.com/embed/nGH2o4sKBgE&quot; allow=&quot;autoplay; encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;wet mixed with 70:25:5 KNO3, Charcoal, Sulphur &lt;/td&gt;
+&lt;td&gt;&lt;center&gt;
+&lt;iframe style=&quot;margin:1px !important; border:1px; display:inline; width:auto;&quot; src=&quot;https://www.youtube-nocookie.com/embed/BjkKNRxMg_A&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/center&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;wet mixed no sulphur, but sugar, 70:25:5 &lt;/td&gt;
+&lt;td&gt;&lt;center&gt;
+&lt;iframe style=&quot;margin:1px !important; border:1px; display:inline; width:auto;&quot; src=&quot;https://www.youtube-nocookie.com/embed/YCrHAURaHp8&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/center&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;wet mixed with sugar, 75:20:5&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;
+&lt;iframe style=&quot;margin:1px !important; border:1px; display:inline; width:auto;&quot; src=&quot;https://www.youtube-nocookie.com/embed/koO5LKAUWEo&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/center&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h6 id=&quot;references&quot;&gt;References&lt;/h6&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Charcoal&quot;&gt; Wikipedia Charcoal &lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Sulphur&quot;&gt; Wikipedia Sulphur &lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Potassium_nitrate&quot;&gt; Wikipedia Pottasium Nitrate &lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Gunpowder&quot;&gt; Wikipedia Black Powder &lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Rocket_candy&quot;&gt; Wikipedia Rocket Candy &lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&quot;divider&quot; /&gt;
+
+&lt;center&gt;&lt;span style=&quot;font-size: 15px; &quot;&gt; 
+F I N I T O 
+&lt;/span&gt;&lt;/center&gt;
+</description>
+          <pubDate>2016-11-15T00:00:00+00:00</pubDate>
+          <link>http://localhost:4000/notes/gunpowder</link>
+          <guid isPermaLink="true">http://localhost:4000/notes/gunpowder</guid>
+        </item>
+      
+    
+      
+        <item>
+          <title>For Example of very Long Title Would Be Typography Elements in One</title>
+          <description>&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; This markdown cheatsheet is a typography demo for this theme. Check out this post to learn more about this markdown usage when you want to get started with this theme. Enjoy!&lt;/p&gt;
+
+&lt;h2 id=&quot;typography-elements-in-one&quot;&gt;Typography Elements in One&lt;/h2&gt;
+
+&lt;p&gt;Let’s start with a informative paragraph. &lt;strong&gt;This text is bolded.&lt;/strong&gt; But not this one! &lt;em&gt;How about italic text?&lt;/em&gt; Cool right? Ok, let’s &lt;strong&gt;&lt;em&gt;combine&lt;/em&gt;&lt;/strong&gt; them together. Yeah, that’s right! I have code to highlight, so &lt;code class=&quot;highlighter-rouge&quot;&gt;ThisIsMyCode()&lt;/code&gt;. What a nice! Good people will hyperlink away, so &lt;a href=&quot;#&quot;&gt;here we go&lt;/a&gt; or &lt;a href=&quot;http://www.example.com&quot;&gt;http://www.example.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;headings-h1-to-h6&quot;&gt;Headings H1 to H6&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1-heading&quot;&gt;H1 Heading&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2-heading&quot;&gt;H2 Heading&lt;/h2&gt;
+
+&lt;h3 id=&quot;h3-heading&quot;&gt;H3 Heading&lt;/h3&gt;
+
+&lt;h4 id=&quot;h4-heading&quot;&gt;H4 Heading&lt;/h4&gt;
+
+&lt;h5 id=&quot;h5-heading&quot;&gt;H5 Heading&lt;/h5&gt;
+
+&lt;h6 id=&quot;h6-heading&quot;&gt;H6 Heading&lt;/h6&gt;
+
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;footnote&quot;&gt;Footnote&lt;/h2&gt;
+
+&lt;p&gt;Let’s say you have text that you want to refer with a footnote, you can do that too! This is an example for the footnote number one &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. You can even add more footnotes, with link! &lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;blockquote&quot;&gt;Blockquote&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Start by doing what’s necessary; then do what’s possible; and suddenly you are doing the impossible. –Francis of Assisi&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; This theme does NOT support nested blockquotes.&lt;/p&gt;
+
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;list-items&quot;&gt;List Items&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;First order list item&lt;/li&gt;
+  &lt;li&gt;Second item&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Unordered list can use asterisks&lt;/li&gt;
+  &lt;li&gt;2&lt;/li&gt;
+  &lt;li&gt;Or minuses&lt;/li&gt;
+  &lt;li&gt;Or pluses&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;code-blocks&quot;&gt;Code Blocks&lt;/h2&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;JavaScript syntax highlighting&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Python syntax highlighting&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;No language indicated, so no syntax highlighting.
+But let's throw in a &amp;lt;b&amp;gt;tag&amp;lt;/b&amp;gt;.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;mathematics&quot;&gt;Mathematics&lt;/h2&gt;
+
+&lt;p&gt;The theme comes ready with &lt;a href=&quot;https://www.mathjax.org/&quot;&gt;mathjax&lt;/a&gt; support built in, allowing for both simple inline equations like &lt;script type=&quot;math/tex&quot;&gt;ax^2 + bx + c = 0&lt;/script&gt; and much more complex mathematical expressions such as equation &lt;script type=&quot;math/tex&quot;&gt;\eqref{eq:sample}&lt;/script&gt; below.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align}
+\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t}  &amp;= \frac{4\pi}{c}\vec{\mathbf{j}} \\   
+\nabla \cdot \vec{\mathbf{E}} &amp;= 4 \pi \rho \tag{2} \label{eq:sample}\\
+\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t}  &amp;= \vec{\mathbf{0}} \\
+\nabla \cdot \vec{\mathbf{B}}  &amp;= 0\\
+\end{align} %]]&gt;&lt;/script&gt;
+
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;table&quot;&gt;Table&lt;/h2&gt;
+
+&lt;h3 id=&quot;table-1-with-alignment&quot;&gt;Table 1: With Alignment&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Tables&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Are&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;Cool&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;col 3 is&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;right-aligned&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;$1600&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;col 2 is&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;centered&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;$12&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;zebra stripes&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;are neat&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;$1&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;table-2-with-typography-elements&quot;&gt;Table 2: With Typography Elements&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Markdown&lt;/th&gt;
+      &lt;th&gt;Less&lt;/th&gt;
+      &lt;th&gt;Pretty&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;em&gt;Still&lt;/em&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;renders&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;nicely&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;horizontal-line&quot;&gt;Horizontal Line&lt;/h2&gt;
+
+&lt;p&gt;The HTML &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;hr&amp;gt;&lt;/code&gt; element is for creating a “thematic break” between paragraph-level elements. In markdown, you can create a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;hr&amp;gt;&lt;/code&gt; with any of the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;___&lt;/code&gt;: three consecutive underscores&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;---&lt;/code&gt;: three consecutive dashes&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;***&lt;/code&gt;: three consecutive asterisks&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;renders to:&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;media&quot;&gt;Media&lt;/h2&gt;
+
+&lt;h3 id=&quot;youtube-embedded-iframe&quot;&gt;YouTube Embedded Iframe&lt;/h3&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/n1a7o44WxNo&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&quot;image&quot;&gt;Image&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://octodex.github.com/images/minion.png&quot; alt=&quot;Minion&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;Footnote number one yeah baby! Long sentence test of footnote to see how the words are wrapping between each other. Might overflowww! &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;A footnote you can link to - &lt;a href=&quot;#&quot;&gt;click here!&lt;/a&gt; &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+          <pubDate>2016-10-18T00:00:00+00:00</pubDate>
+          <link>http://localhost:4000/notes/very-long-title-post</link>
+          <guid isPermaLink="true">http://localhost:4000/notes/very-long-title-post</guid>
+        </item>
+      
+    
+      
+        <item>
+          <title>Fireworks</title>
+          <description>&lt;p&gt;&lt;strong&gt;When&lt;/strong&gt; I was between 7 to 18yrs of age. Fireworks were one of my most fav things to waste time on.
+I am a Hindu, and there is a festival of Diwali(lights), thats a period where everyone* bursts a bunch
+ of fireworks. Its supposed to ward off evil, and create positive impact.  I was always fascinated by 
+the fireworks, but since internet wasn’t a thing back then, knowledge was limited.
+I used to ask my dad(who was a dokotor) or then one of my paternal uncles, or learn by observation,
+primary source was observing my brothers, cousins, and friends.&lt;/p&gt;
+
+&lt;p&gt;A few things I could figure out on my own, or by observing others. My very first firecracker experience was
+when I was maybe about 5 yrs old, and I was so scared of it, that I fell while running, away.
+Then after observing my brother, I finally understood how it works, and it was kinda neat. Use a hot
+stick to light it, and after a set time it explodes. My elder cousins would take the mis-fired firecrackers
+cut it open, pour out the powder on a paper, and set it on fire, that would cause a flash of smoke and fire
+when the said powder burned. It was all very cool to see. I had assumed back then that the powder was something like
+1) a match stick, 2) a camphor 3) petrol/kerosene which are all inflamable. I knew the basic science that
+Oxygen was needed to light fire, but didn’t make the connection, that there are sources of oxygen other than
+air. For me back then, petrol and gunpowder were both almost the same w.r.t fire, both of them burned vigorously when lit
+on fire. Oh yeah, and I knew about camphor because its a central item in Hindu rituals.&lt;/p&gt;
+
+&lt;p&gt;After gaining this new info, I cut open a few fireworks. Observation was that firecrackers that would explode with loud bang
+contained some kind of silvery-grey powder, when it was on the hand, it reflected a silvery metalic color.
+The rockets, or crackers in general that wizz, had a dark, almost black smooth powder, this looked like soot
+from lamps. Flowerpots etc, had some time of peletts. These beads would just glow for a while and then do nothing.
+There was some wierd powder, that I never understood, it was white in color, and there was nothing like it
+in any of the other firecrackers. This powder, was from crackers that produced a musical note.&lt;/p&gt;
+
+&lt;p&gt;In my early teens, I used to mix two pots together, or , add another cracker on a rocket, or , use
+sparkels, and add them into pots etc etc… basicall just basic combining things to see whats produced.
+I remember doing a pretty good firepot made from rocket dust, and crushed sparkels. There always was one effect
+that I couldn’t produce…nor did I understand how it worked.&lt;/p&gt;
+
+&lt;p&gt;This was the whistling effect. I noticed early on that the firecrackers that produced this whistle were costly.
+They wizzed like rockets. They had a white powder, that didn’t burn like any of the other powders. It either lit
+up quite quickly, or just smoked. At this time, I wasn’t clever enough at that time to figure out, how were they
+producing sound. My theory was its gotta do with the container they are in, like for eg. a whistle. To my surprise
+they still produced whistle , no matter how I changed the container shape… so it was a mystry to me.&lt;/p&gt;
+
+&lt;p&gt;I do remember reading somewhere that there are some special compositions involved in creating black powder,
+but I never did it, never made the time, Diwali is seasonal affair, and immediately following diwali, we had some
+educational stuff to do. I do remember reading somewhere that there are some special compositions involved in 
+creating black powder, but I never did it, never got the time.&lt;/p&gt;
+
+&lt;p&gt;A few days ago, I came across an interesting article on nitrates leeching into soil, and while reading some of that
+realized that nitrates are one of the main oxidizers used in fireworks. Finally I am now somewhat stable from 
+some aspects of my life, that I can invest some time in this as a hobby. Starting today I am going to try to DIY 
+a few things, and get a closure on something that 
+I always wanted to do.. in particular create some black powder, and ultimately create a whistle based off of 
+firework compositions.&lt;/p&gt;
+
+&lt;p&gt;Lets see how it goes..&lt;/p&gt;
+</description>
+          <pubDate>2016-10-10T00:00:00+00:00</pubDate>
+          <link>http://localhost:4000/notes/fireworks</link>
+          <guid isPermaLink="true">http://localhost:4000/notes/fireworks</guid>
+        </item>
+      
+    
+  </channel>
+</rss>
