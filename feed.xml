@@ -7,6 +7,239 @@
     
       
         <item>
+          <title>Elf Gottchas</title>
+          <description>&lt;p&gt;&lt;strong&gt;T&lt;/strong&gt;rying to get my hands full with embedded ARM cores this year. Trying few raspberry PI kits. So, first thing, get a boot loader working.&lt;/p&gt;
+
+&lt;p&gt;Picked up all the essentials from &lt;a href=&quot;https://elinux.org/RPi_U-Boot&quot;&gt;bootloader section at elinux&lt;/a&gt;. Trying to run the tools, I got the following wierdity:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; ./arm-bcm2708hardfp-linux-gnueabi-gcc
+./arm-bcm2708hardfp-linux-gnueabi-gcc
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;file ./arm-bcm2708hardfp-linux-gnueabi-gcc
+./arm-bcm2708hardfp-linux-gnueabi-gcc: ELF 32-bit LSB executable, Intel 80386, version 1 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;SYSV&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, dynamically linked, interpreter /lib/ld-linux.so.2, &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;GNU/Linux 2.6.15, BuildID[sha1]&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;e2801f48a84144e2b40d6083baac317057662b3c, stripped
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./arm-bcm2708hardfp-linux-gnueabi-gcc
+bash: ./arm-bcm2708hardfp-linux-gnueabi-gcc: No such file or directory
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; ./arm-bcm2708hardfp-linux-gnueabi-gcc
+&lt;span class=&quot;nt&quot;&gt;-rwxr-xr-x&lt;/span&gt; 1 hk47 hk47 560424 Jan 25 22:52 ./arm-bcm2708hardfp-linux-gnueabi-gcc&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;WTF, its an exec file. but, running it causes bash to report an error claiming the file doesn’t exist. Whats going on here ? Lets try strace..&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace ./arm-bcm2708hardfp-linux-gnueabi-gcc
+execve&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;./arm-bcm2708hardfp-linux-gnueabi-gcc&quot;&lt;/span&gt;, &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;./arm-bcm2708hardfp-linux-gnueab&quot;&lt;/span&gt;...], 0x7ffc79750a70 /&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; 35 vars &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;/&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt; ENOENT &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;No such file or directory&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+.....&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Ok, so it did try to execv the file, and it returned ENOENT. The &lt;strong&gt;&lt;a href=&quot;http://man7.org/linux/man-pages/man2/execve.2.html&quot;&gt;execv man page&lt;/a&gt;&lt;/strong&gt; says ENOENT would mean:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;   ENOENT The file filename or a script or ELF interpreter does not
+              exist, or a shared library needed &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;the file or interpreter
+              cannot be found.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Since the file clearly exist, the candidates now are elf interpreter or shared lib for the interpreter. lets try ldd to see if we get any missing libraries. And since ldd doesn’t know what the fuck is going on, then we try readelf&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ldd ./arm-bcm2708hardfp-linux-gnueabi-gcc
+	not a dynamic executable
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;readelf &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; ./arm... | less
+    INTERP         0x000154 0x08048154 0x08048154 0x00013 0x00013 R   0x1
+      &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Requesting program interpreter: /lib/ld-linux.so.2]
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;file /lib/ld-linux.so.2
+/lib/ld-linux.so.2: cannot open &lt;span class=&quot;s1&quot;&gt;'/lib/ld-linux.so.2'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;No such file or directory&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;readelf &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; /usr/bin/gcc | less
+  INTERP         0x00000000000002e0 0x00000000004002e0 0x00000000004002e0
+                 0x000000000000001c 0x000000000000001c  R      0x1
+      &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;file /lib64/ld-linux-x86-64.so.2
+/lib64/ld-linux-x86-64.so.2: symbolic &lt;span class=&quot;nb&quot;&gt;link &lt;/span&gt;to ld-2.28.so
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pacman &lt;span class=&quot;nt&quot;&gt;--files&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--list&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ld-linux.so.2&quot;&lt;/span&gt;
+lib32-glibc usr/lib/ld-linux.so.2
+lib32-glibc usr/lib32/ld-linux.so.2
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pacman &lt;span class=&quot;nt&quot;&gt;--sync&lt;/span&gt; lib32-glibc
+...
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ldd ./arm-bcm2708hardfp-linux-gnueabi-gcc
+ldd ./arm-bcm2708hardfp-linux-gnueabi-gcc
+	linux-gate.so.1 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0xf7edc000&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	libc.so.6 &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; /usr/lib32/libc.so.6 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0xf7ce3000&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	/lib/ld-linux.so.2 &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; /usr/lib/ld-linux.so.2 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0xf7ede000&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Ok so as can be seen this seems like a case of missing interpreter, so we just need the ld-linux.so.2 file.&lt;/p&gt;
+
+&lt;p&gt;So just install lib32-glibc.&lt;/p&gt;
+</description>
+          <pubDate>2019-01-26T00:00:00+00:00</pubDate>
+          <link>https://nikhildjoshi.github.io/notes/ELF-gottchas</link>
+          <guid isPermaLink="true">https://nikhildjoshi.github.io/notes/ELF-gottchas</guid>
+        </item>
+      
+    
+      
+        <item>
+          <title>Golang</title>
+          <description>&lt;p&gt;&lt;strong&gt;This post is mostly a rant. Be warned, I hate Go, and I hate pretentious people. No disrespect to &lt;a href=&quot;https://en.wikipedia.org/wiki/Ken_Thompson&quot;&gt;Ken Thompson&lt;/a&gt; though.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Golang&lt;/strong&gt; , a language created by people who created &lt;a href=&quot;https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs&quot;&gt;Plan 9&lt;/a&gt;. Plan 9 was an operating system that was supposed to pioneer distributed os. In reality it never picked off. I haven’t seen it and I don’t need to comment on merits or demerits of it.&lt;/p&gt;
+
+&lt;p&gt;It also sounds like he has some grudge against &lt;a href=&quot;https://en.wikipedia.org/wiki/Bjarne_Stroustrup&quot;&gt;Bjarne Stroustrup&lt;/a&gt;. Anyway, sounds like somewhere in 2009 he announced along with Ken Thompson, announced Golang. The claim being&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&quot;Go was designed at Google in 2007 to improve programming productivity
+ in an era of multicore, networked machines and extremely large codebases.&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;My personal experience with Golang has been kind of a mixed bag. I wasn’t really blown by anything that the language was able to do. I have done much things with C++ , and now very few things impress me, for better or for worse.&lt;/p&gt;
+
+&lt;p&gt;A few advantages of language include simple package management (to be read as “no package management”), and no versioning.( Things which are going to be introduced in Golang v2, lol).&lt;/p&gt;
+
+&lt;p&gt;After programming in it for about 4-5 months, and migrating a project over from C to golang, my honest opinion is of a language trying to re-invent the wheel, and a language which would end up not being able to do it more properly than its predecessors.&lt;/p&gt;
+
+&lt;p&gt;Golang also does many crazy things like growing/shrinking stacks while program is running :/, using some Plan9 function calling conventions, etc.. The language feels very productive, if throwing up a quick code suey is the daily thyng. My biggest complain is re-inventing class objects, and creating arbitrary features like “slices”.. There is literally no advantage in doing that.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://gobyexample.com/slices&quot;&gt;slices&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt; for example. WhyTF does anyone need slices ? What problem do they solve ? Its just some syntactic sugar, and not even fool proof at doing what it does…&lt;a href=&quot;https://blog.golang.org/go-slices-usage-and-internals&quot;&gt;impl of slices&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I also feel Rob is very pretentious.He claims Go is simple. I mean sure it is simple, &lt;strong&gt;but&lt;/strong&gt; it doesn’t include all the rich feature sets that other languages have.eg. I want to pass a variable and have guarentee that it cannot be changed by the function…tough luck can’t do that, because, &lt;em&gt;&quot;less is more&quot;&lt;/em&gt; or whatever the fk, says Mr.Pike.&lt;/p&gt;
+
+&lt;p&gt;He claims Bjarne went all over to heavily promote C++, but, then he himself is promoting the language like crazy. And in any case, language didn’t gain much any traction untill Google put its weight behind the language.&lt;/p&gt;
+
+&lt;p&gt;Moreover, adding things like generics, versioning etc… is making the language closer to java anyway… so the simplicity was I think a scam ! &lt;a href=&quot;https://blog.golang.org/go2draft&quot;&gt;Golang 2 does everything Golang is supposedly against&lt;/a&gt;…&lt;/p&gt;
+
+&lt;p&gt;Error handling , propagation etc is a shit show. Its confused between error handling as done by Java and as done by C.&lt;/p&gt;
+
+&lt;p&gt;In any case, I would much prefer working with something like Rust if adopting a new langauge is something that is real priority.  Rust will probably be the language (if any ) to replace a system programming language of the future.&lt;/p&gt;
+
+&lt;p&gt;References :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Rust_(programming_language)&quot;&gt;Rust&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Go_(programming_language)&quot;&gt;Golang&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Rob_Pike&quot;&gt;Rob pike&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gobyexample.com/slices&quot;&gt;Slices&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+          <pubDate>2018-07-20T00:00:00+00:00</pubDate>
+          <link>https://nikhildjoshi.github.io/notes/golang</link>
+          <guid isPermaLink="true">https://nikhildjoshi.github.io/notes/golang</guid>
+        </item>
+      
+    
+      
+        <item>
+          <title>Dual Nature Light</title>
+          <description>&lt;p&gt;&lt;strong&gt;L&lt;/strong&gt;ight, such an interesting form of energy! Since an animal is born, and it opens eyes for the first time, this energy enters their eyes, and provides a massive information flow.
+Probably the most information they will ever get is from the medium of light.&lt;/p&gt;
+
+&lt;p&gt;Today I stumbled on an article for dual nature of light. It is a fascinatiing concept.  So I wanted to see this for myself, so I tried to see what could be done to get this going , my solution was to use a hair as a windowing/splitting mechanism, on top of a laser pointer, and that worked like a charm !&lt;/p&gt;
+
+&lt;p&gt;So if you want to try this out for yourself, thats something you could do quite easily.&lt;/p&gt;
+
+&lt;p&gt;Now that I think of this, I think I have seen a similar kind of effect on bags filled with water, or if you turn a lense in a particular way. I am not sure if its
+the same interference mechanism that creates that type of behavior, but it looks very similar, just instead of a line, its more like a 2D projection. And there might
+be different starting conditions since here more complicated things like refraction and reflection are involved.&lt;/p&gt;
+
+&lt;p&gt;Anyway, Here is a video that someone did to demonstrate it&lt;/p&gt;
+
+&lt;p&gt;And here is an image of light refraction pattern in water :
+&lt;img src=&quot;https://i.stack.imgur.com/fkwo9.jpg&quot; alt=&quot;water reflections&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;And here is an image of laser reflection :
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/c/c2/Single_slit_and_double_slit2.jpg&quot; alt=&quot;water reflections&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There are a lot of things to read on this , here are a few links :&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Young%27s_interference_experiment&quot;&gt;Wikipedia Young’s experiment&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Wave_interference&quot;&gt;Wikipedia link on wave interference&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Veritasium’s video&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;
+&lt;iframe style=&quot;width:30%;&quot; src=&quot;https://www.youtube.com/embed/Iuv6hY6zsd0&quot; allow=&quot; encrypted-media; picture-in-picture&quot;&gt;&lt;/iframe&gt;
+&lt;/center&gt;
+</description>
+          <pubDate>2017-01-10T00:00:00+00:00</pubDate>
+          <link>https://nikhildjoshi.github.io/notes/dual-nature-light</link>
+          <guid isPermaLink="true">https://nikhildjoshi.github.io/notes/dual-nature-light</guid>
+        </item>
+      
+    
+      
+        <item>
+          <title>Incremental Page Loading</title>
+          <description>&lt;p&gt;&lt;strong&gt;T&lt;/strong&gt;oday I propsed a new way to do javascript based dynamic rendering.
+After migrating from a native blink rendering solution, we moved to javascript.  Speed, power , and resources were heavily consumed. I took a look at the same page loading at 3x low speeds. It was painful to see.&lt;/p&gt;
+
+&lt;p&gt;We are currently using SVG/XML in order to render pages instead of HTNL. The svg is generated from chromium’s compositor, and in that , using skia.
+We did see that most of the time was clearly being spent on recreating the nodes of the SVG.&lt;/p&gt;
+
+&lt;p&gt;Thus the idea that I proposed was to take two frames as SVG, compute the difference, and then only apply the difference. To complicate things, we do want to see partial differences. ie. If two nodes are differing by only one character, then those two should be matched as same nodes with the delta as a chagne between them.&lt;/p&gt;
+
+&lt;p&gt;If it were simply a yes/no comparison, the problem was very simple. It was to compare a two trees. But with the idea that partial comparisons should be properly resolved, it becomes harder. How ? Why ? Lets consider an example:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;svg&amp;gt;
+&amp;lt;!-- frame 1 --!&amp;gt;
+&amp;lt;tag1 atribs1234&amp;gt; node a
+&amp;lt;tag1 atribs1456&amp;gt; node b
+&amp;lt;/svg&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;svg&amp;gt;
+&amp;lt;!-- frame 2 --!&amp;gt;
+&amp;lt;tag1 atribs234&amp;gt; node a
+&amp;lt;tag1 atribs1236&amp;gt; node b
+&amp;lt;/svg&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, how do you figure out which node from frame 2 should match node from frame 1 ? Intutively, we can see that node a from frame 1 differs with node a from frame 2 by absence of attrib1, so, there is 1 change required to convert frame 1 nodea to frame2 node a. This is a delete operation.&lt;/p&gt;
+
+&lt;p&gt;Therefore, we can see that to convert a node from A to B, we need to apply a few operations to it. The number and cost of such operations then is the value that we can give to a pair of nodes, as a score. If we calculate this score for each pair of node, and then get a sorted list of these scores, that would give us the most optimal arrangement of node mappings, such that to convert each node to its corresponding node, the minimum number of operations need to be applied !&lt;/p&gt;
+
+&lt;p&gt;There are many well known edit distance /levenstien distance calculation codes that could be deployed to calculate this score.&lt;/p&gt;
+
+&lt;p&gt;But wait, we want this to be calculated with each node. These operations are typically non linear. And we have around thousand nodes atleast on a frame. This means we cannot use edit distance. :/&lt;/p&gt;
+
+&lt;h3 id=&quot;enter-the-engineer&quot;&gt;Enter the Engineer&lt;/h3&gt;
+
+&lt;p&gt;We now need to reduce the time it takes, since this is a critical path operation, the rendering speed and therefore FPS depends on it. So does battery, power and resource consumption.&lt;/p&gt;
+
+&lt;p&gt;So first thing to observe here is that, we don’t necessarily need like a 100% proper score, we just need similar nodes. What are other similarity calculators that are easier and cheaper to operate on ?&lt;/p&gt;
+
+&lt;p&gt;One similarity calculation could be to just count frequency of character, and use the distribution as a signature. Since most SVG is only a subset of characters, this would most likely give us faster speeds ? Lets think about this, xml tags generally don’t use full a to z characters. It also uses numbers, and mis chars like = “ , etc.. this means, we can convert 200 chars to 50 ish chars.&lt;/p&gt;
+
+&lt;p&gt;Now our time complexity looks like O(200+200) for converting a string into signature of 50 characters. And then O(50) to compare the two signatures.
+This is a clear improvement over O(200*200) worst case for edit distance calculations.&lt;/p&gt;
+
+&lt;p&gt;We still can’t get away with the N*N comparision though. Sorting could still be done quite easily and cheaply using something like insertion sort.&lt;/p&gt;
+
+&lt;p&gt;Well so that would be it.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;To summarize,&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;For each node, convert it to its signature.&lt;/li&gt;
+  &lt;li&gt;Then, just do a N*N tabular comparison, and sort it by scores.&lt;/li&gt;
+  &lt;li&gt;For each pair with lowest to highest scores,
+    &lt;ul&gt;
+      &lt;li&gt;Get changed, added or deleted attributes, and they are the node delta.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+          <pubDate>2017-01-02T00:00:00+00:00</pubDate>
+          <link>https://nikhildjoshi.github.io/notes/incremental-page-loading</link>
+          <guid isPermaLink="true">https://nikhildjoshi.github.io/notes/incremental-page-loading</guid>
+        </item>
+      
+    
+      
+        <item>
           <title>Aluminium Flash Powder</title>
           <description>&lt;p&gt;&lt;strong&gt;Back on subject of fireworks&lt;/strong&gt;, now that I am pretty much done with gunpowder and rocket candies, now its time for another firework trick mixture, “flash powder”. A flash powder is a mixture of oxidizer and a fuel, just like gunpowder or rocket candy. The reason its called &lt;strong&gt;flash powder&lt;/strong&gt; is because it burns more vigirously and produces a bright flash.&lt;/p&gt;
 
@@ -291,11 +524,6 @@ Generally accepted simplistic formula is stated as :&lt;/p&gt;
   &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Gunpowder&quot;&gt; Wikipedia Black Powder &lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Rocket_candy&quot;&gt; Wikipedia Rocket Candy &lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&quot;divider&quot; /&gt;
-
-&lt;center&gt;&lt;span style=&quot;font-size: 15px; &quot;&gt; 
-F I N I T O 
-&lt;/span&gt;&lt;/center&gt;
 </description>
           <pubDate>2016-11-15T00:00:00+00:00</pubDate>
           <link>https://nikhildjoshi.github.io/notes/gunpowder</link>

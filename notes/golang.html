@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<title>Golang · N I K H I L J O S H I</title>
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:title" content="Golang" />
+<meta name="twitter:description" content="This post is mostly a rant. Be warned, I hate Go, and I hate pretentious people. No disrespect to Ken Thompson though.">
+
+<meta name="description" content="This post is mostly a rant. Be warned, I hate Go, and I hate pretentious people. No disrespect to Ken Thompson though.">
+
+
+
+<link rel="icon" href="https://nikhildjoshi.github.io/assets/favicon.png">
+<link rel="apple-touch-icon" href="https://nikhildjoshi.github.io/assets/touch-icon.png">
+<link rel="stylesheet" href="https://nikhildjoshi.github.io/assets/core.css">
+<link rel="canonical" href="https://nikhildjoshi.github.io/notes/golang">
+<link rel="alternate" type="application/atom+xml" title="N I K H I L J O S H I" href="https://nikhildjoshi.github.io/feed.xml" />
+
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+	</head>
+
+	<body>
+
+		<aside class="logo">
+	
+	<a href="/" style ="border:none;">
+		<img src="/assets/banner.png" style="">
+	</a>
+</aside>
+
+		<main>
+			<article>
+
+	<div class="center">
+		<h1 class="title">Golang</h1>
+		<time>July 20, 2018</time>
+	</div>
+
+	<div class="divider"></div>
+
+	<p><strong>This post is mostly a rant. Be warned, I hate Go, and I hate pretentious people. No disrespect to <a href="https://en.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a> though.</strong></p>
+
+<p><strong>Golang</strong> , a language created by people who created <a href="https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs">Plan 9</a>. Plan 9 was an operating system that was supposed to pioneer distributed os. In reality it never picked off. I haven’t seen it and I don’t need to comment on merits or demerits of it.</p>
+
+<p>It also sounds like he has some grudge against <a href="https://en.wikipedia.org/wiki/Bjarne_Stroustrup">Bjarne Stroustrup</a>. Anyway, sounds like somewhere in 2009 he announced along with Ken Thompson, announced Golang. The claim being</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"Go was designed at Google in 2007 to improve programming productivity
+ in an era of multicore, networked machines and extremely large codebases."
+</code></pre></div></div>
+
+<p>My personal experience with Golang has been kind of a mixed bag. I wasn’t really blown by anything that the language was able to do. I have done much things with C++ , and now very few things impress me, for better or for worse.</p>
+
+<p>A few advantages of language include simple package management (to be read as “no package management”), and no versioning.( Things which are going to be introduced in Golang v2, lol).</p>
+
+<p>After programming in it for about 4-5 months, and migrating a project over from C to golang, my honest opinion is of a language trying to re-invent the wheel, and a language which would end up not being able to do it more properly than its predecessors.</p>
+
+<p>Golang also does many crazy things like growing/shrinking stacks while program is running :/, using some Plan9 function calling conventions, etc.. The language feels very productive, if throwing up a quick code suey is the daily thyng. My biggest complain is re-inventing class objects, and creating arbitrary features like “slices”.. There is literally no advantage in doing that.</p>
+
+<p><strong><em><a href="https://gobyexample.com/slices">slices</a></em></strong> for example. WhyTF does anyone need slices ? What problem do they solve ? Its just some syntactic sugar, and not even fool proof at doing what it does…<a href="https://blog.golang.org/go-slices-usage-and-internals">impl of slices</a>.</p>
+
+<p>I also feel Rob is very pretentious.He claims Go is simple. I mean sure it is simple, <strong>but</strong> it doesn’t include all the rich feature sets that other languages have.eg. I want to pass a variable and have guarentee that it cannot be changed by the function…tough luck can’t do that, because, <em>"less is more"</em> or whatever the fk, says Mr.Pike.</p>
+
+<p>He claims Bjarne went all over to heavily promote C++, but, then he himself is promoting the language like crazy. And in any case, language didn’t gain much any traction untill Google put its weight behind the language.</p>
+
+<p>Moreover, adding things like generics, versioning etc… is making the language closer to java anyway… so the simplicity was I think a scam ! <a href="https://blog.golang.org/go2draft">Golang 2 does everything Golang is supposedly against</a>…</p>
+
+<p>Error handling , propagation etc is a shit show. Its confused between error handling as done by Java and as done by C.</p>
+
+<p>In any case, I would much prefer working with something like Rust if adopting a new langauge is something that is real priority.  Rust will probably be the language (if any ) to replace a system programming language of the future.</p>
+
+<p>References :</p>
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Rust_(programming_language)">Rust</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Go_(programming_language)">Golang</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Rob_Pike">Rob pike</a></li>
+  <li><a href="https://gobyexample.com/slices">Slices</a></li>
+</ul>
+
+<div class="divider" />
+<br>
+<div class="page-navigation">
+	
+    <a class="next" href="https://nikhildjoshi.github.io/notes/ELF-gottchas" title="NEXT: Elf Gottchas">&lt;&lt;</a>
+		<span> &middot; </span>
+  
+		<a class="home" href="https://nikhildjoshi.github.io" title="Back to Homepage">Home</a>
+  
+		<span> &middot; </span>
+    <a class="prev" href="https://nikhildjoshi.github.io/notes/dual-nature-light" title="PREV: Dual Nature Light">&gt;&gt;</a>
+  
+</div>
+</article>
+
+		</main>
+		<div class="logo">
+</div>
+<div class="footer">
+  <span class="block">&copy; 2019 Nikhil Joshi</span>
+  <span class="block"><small><small>Life is largely random, don't take it too seriously</small></small></span>
+</div>
+
+
+	</body>
+
+</html>

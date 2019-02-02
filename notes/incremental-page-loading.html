@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<title>Incremental Page Loading · N I K H I L J O S H I</title>
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:title" content="Incremental Page Loading" />
+<meta name="twitter:description" content="Today I propsed a new way to do javascript based dynamic rendering.After migrating from a native blink rendering solution, we moved to javascript.  Speed, power , and resources were heavily consume...">
+
+<meta name="description" content="Today I propsed a new way to do javascript based dynamic rendering.After migrating from a native blink rendering solution, we moved to javascript.  Speed, po...">
+
+
+
+<link rel="icon" href="https://nikhildjoshi.github.io/assets/favicon.png">
+<link rel="apple-touch-icon" href="https://nikhildjoshi.github.io/assets/touch-icon.png">
+<link rel="stylesheet" href="https://nikhildjoshi.github.io/assets/core.css">
+<link rel="canonical" href="https://nikhildjoshi.github.io/notes/incremental-page-loading">
+<link rel="alternate" type="application/atom+xml" title="N I K H I L J O S H I" href="https://nikhildjoshi.github.io/feed.xml" />
+
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+	</head>
+
+	<body>
+
+		<aside class="logo">
+	
+	<a href="/" style ="border:none;">
+		<img src="/assets/banner.png" style="">
+	</a>
+</aside>
+
+		<main>
+			<article>
+
+	<div class="center">
+		<h1 class="title">Incremental Page Loading</h1>
+		<time>January 2, 2017</time>
+	</div>
+
+	<div class="divider"></div>
+
+	<p><strong>T</strong>oday I propsed a new way to do javascript based dynamic rendering.
+After migrating from a native blink rendering solution, we moved to javascript.  Speed, power , and resources were heavily consumed. I took a look at the same page loading at 3x low speeds. It was painful to see.</p>
+
+<p>We are currently using SVG/XML in order to render pages instead of HTNL. The svg is generated from chromium’s compositor, and in that , using skia.
+We did see that most of the time was clearly being spent on recreating the nodes of the SVG.</p>
+
+<p>Thus the idea that I proposed was to take two frames as SVG, compute the difference, and then only apply the difference. To complicate things, we do want to see partial differences. ie. If two nodes are differing by only one character, then those two should be matched as same nodes with the delta as a chagne between them.</p>
+
+<p>If it were simply a yes/no comparison, the problem was very simple. It was to compare a two trees. But with the idea that partial comparisons should be properly resolved, it becomes harder. How ? Why ? Lets consider an example:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;svg&gt;
+&lt;!-- frame 1 --!&gt;
+&lt;tag1 atribs1234&gt; node a
+&lt;tag1 atribs1456&gt; node b
+&lt;/svg&gt;
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;svg&gt;
+&lt;!-- frame 2 --!&gt;
+&lt;tag1 atribs234&gt; node a
+&lt;tag1 atribs1236&gt; node b
+&lt;/svg&gt;
+</code></pre></div></div>
+
+<p>Now, how do you figure out which node from frame 2 should match node from frame 1 ? Intutively, we can see that node a from frame 1 differs with node a from frame 2 by absence of attrib1, so, there is 1 change required to convert frame 1 nodea to frame2 node a. This is a delete operation.</p>
+
+<p>Therefore, we can see that to convert a node from A to B, we need to apply a few operations to it. The number and cost of such operations then is the value that we can give to a pair of nodes, as a score. If we calculate this score for each pair of node, and then get a sorted list of these scores, that would give us the most optimal arrangement of node mappings, such that to convert each node to its corresponding node, the minimum number of operations need to be applied !</p>
+
+<p>There are many well known edit distance /levenstien distance calculation codes that could be deployed to calculate this score.</p>
+
+<p>But wait, we want this to be calculated with each node. These operations are typically non linear. And we have around thousand nodes atleast on a frame. This means we cannot use edit distance. :/</p>
+
+<h3 id="enter-the-engineer">Enter the Engineer</h3>
+
+<p>We now need to reduce the time it takes, since this is a critical path operation, the rendering speed and therefore FPS depends on it. So does battery, power and resource consumption.</p>
+
+<p>So first thing to observe here is that, we don’t necessarily need like a 100% proper score, we just need similar nodes. What are other similarity calculators that are easier and cheaper to operate on ?</p>
+
+<p>One similarity calculation could be to just count frequency of character, and use the distribution as a signature. Since most SVG is only a subset of characters, this would most likely give us faster speeds ? Lets think about this, xml tags generally don’t use full a to z characters. It also uses numbers, and mis chars like = “ , etc.. this means, we can convert 200 chars to 50 ish chars.</p>
+
+<p>Now our time complexity looks like O(200+200) for converting a string into signature of 50 characters. And then O(50) to compare the two signatures.
+This is a clear improvement over O(200*200) worst case for edit distance calculations.</p>
+
+<p>We still can’t get away with the N*N comparision though. Sorting could still be done quite easily and cheaply using something like insertion sort.</p>
+
+<p>Well so that would be it.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>To summarize,</p>
+<ul>
+  <li>For each node, convert it to its signature.</li>
+  <li>Then, just do a N*N tabular comparison, and sort it by scores.</li>
+  <li>For each pair with lowest to highest scores,
+    <ul>
+      <li>Get changed, added or deleted attributes, and they are the node delta.</li>
+    </ul>
+  </li>
+</ul>
+
+
+<div class="divider" />
+<br>
+<div class="page-navigation">
+	
+    <a class="next" href="https://nikhildjoshi.github.io/notes/dual-nature-light" title="NEXT: Dual Nature Light">&lt;&lt;</a>
+		<span> &middot; </span>
+  
+		<a class="home" href="https://nikhildjoshi.github.io" title="Back to Homepage">Home</a>
+  
+		<span> &middot; </span>
+    <a class="prev" href="https://nikhildjoshi.github.io/notes/aluminium-flash-powder" title="PREV: Aluminium Flash Powder">&gt;&gt;</a>
+  
+</div>
+</article>
+
+		</main>
+		<div class="logo">
+</div>
+<div class="footer">
+  <span class="block">&copy; 2019 Nikhil Joshi</span>
+  <span class="block"><small><small>Life is largely random, don't take it too seriously</small></small></span>
+</div>
+
+
+	</body>
+
+</html>
