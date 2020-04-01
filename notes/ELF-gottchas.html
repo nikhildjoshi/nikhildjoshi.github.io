@@ -25,9 +25,18 @@
 <link rel="alternate" type="application/atom+xml" title="N I K H I L J O S H I" href="https://nikhildjoshi.github.io/feed.xml" />
 
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+	"display-align": "left",
+  "HTML-CSS": {
+		fonts:["TeX"],
+		scale: 75,
+  }
+});
+</script>
 
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 	</head>
@@ -41,21 +50,34 @@
 	</a>
 </aside>
 
+<aside class="page-navigation">
+
+		<div class="leftMenu">
+    <a  href="https://nikhildjoshi.github.io/notes/of-infant-metrics" title="PREV: Of Infant Metrics"> <-- Of Infant Metrics </a>
+		</div>
+  
+	
+		<div class="rightMenu">
+    <a href="https://nikhildjoshi.github.io/notes/mem-tech-device" title="NEXT: Mem Tech Device"> Mem Tech Device --> </a>
+		</div>
+
+		<div style="clear:both"> </div>
+</aside>
+
 		<main>
 			<article>
-
 	<div class="center">
-		<h1 class="title">Elf Gottchas</h1>
+		<h1>Elf Gottchas</h1>
 		<time>January 26, 2019</time>
+		<p><br></p>
+		<div class="divider"></div>
 	</div>
-
-	<div class="divider"></div>
-
+	<!-- Actual post content starts here -->
 	<p><strong>T</strong>rying to get my hands full with embedded ARM cores this year. Trying few raspberry PI kits. So, first thing, get a boot loader working.</p>
 
 <p>Picked up all the essentials from <a href="https://elinux.org/RPi_U-Boot">bootloader section at elinux</a>. Trying to run the tools, I got the following wierdity:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">ls</span> ./arm-bcm2708hardfp-linux-gnueabi-gcc
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> ./arm-bcm2708hardfp-linux-gnueabi-gcc
 ./arm-bcm2708hardfp-linux-gnueabi-gcc
 
 <span class="nv">$ </span>file ./arm-bcm2708hardfp-linux-gnueabi-gcc
@@ -65,23 +87,25 @@
 bash: ./arm-bcm2708hardfp-linux-gnueabi-gcc: No such file or directory
 
 <span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> ./arm-bcm2708hardfp-linux-gnueabi-gcc
-<span class="nt">-rwxr-xr-x</span> 1 hk47 hk47 560424 Jan 25 22:52 ./arm-bcm2708hardfp-linux-gnueabi-gcc</code></pre></figure>
+<span class="nt">-rwxr-xr-x</span> 1 hk47 hk47 560424 Jan 25 22:52 ./arm-bcm2708hardfp-linux-gnueabi-gcc
+</code></pre></div></div>
 
 <p>WTF, its an exec file. but, running it causes bash to report an error claiming the file doesn’t exist. Whats going on here ? Lets try strace..</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>strace ./arm-bcm2708hardfp-linux-gnueabi-gcc
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>strace ./arm-bcm2708hardfp-linux-gnueabi-gcc
 execve<span class="o">(</span><span class="s2">"./arm-bcm2708hardfp-linux-gnueabi-gcc"</span>, <span class="o">[</span><span class="s2">"./arm-bcm2708hardfp-linux-gnueab"</span>...], 0x7ffc79750a70 /<span class="k">*</span> 35 vars <span class="k">*</span>/<span class="o">)</span> <span class="o">=</span> <span class="nt">-1</span> ENOENT <span class="o">(</span>No such file or directory<span class="o">)</span>
-.....</code></pre></figure>
+.....
+</code></pre></div></div>
 
 <p>Ok, so it did try to execv the file, and it returned ENOENT. The <strong><a href="http://man7.org/linux/man-pages/man2/execve.2.html">execv man page</a></strong> says ENOENT would mean:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">   ENOENT The file filename or a script or ELF interpreter does not
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   ENOENT The file filename or a script or ELF interpreter does not
               exist, or a shared library needed <span class="k">for </span>the file or interpreter
-              cannot be found.</code></pre></figure>
-
+              cannot be found.
+</code></pre></div></div>
 <p>Since the file clearly exist, the candidates now are elf interpreter or shared lib for the interpreter. lets try ldd to see if we get any missing libraries. And since ldd doesn’t know what the fuck is going on, then we try readelf</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>ldd ./arm-bcm2708hardfp-linux-gnueabi-gcc
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ldd ./arm-bcm2708hardfp-linux-gnueabi-gcc
 	not a dynamic executable
 
 <span class="nv">$ </span>readelf <span class="nt">-a</span> ./arm... | less
@@ -109,29 +133,20 @@ lib32-glibc usr/lib32/ld-linux.so.2
 ldd ./arm-bcm2708hardfp-linux-gnueabi-gcc
 	linux-gate.so.1 <span class="o">(</span>0xf7edc000<span class="o">)</span>
 	libc.so.6 <span class="o">=&gt;</span> /usr/lib32/libc.so.6 <span class="o">(</span>0xf7ce3000<span class="o">)</span>
-	/lib/ld-linux.so.2 <span class="o">=&gt;</span> /usr/lib/ld-linux.so.2 <span class="o">(</span>0xf7ede000<span class="o">)</span></code></pre></figure>
+	/lib/ld-linux.so.2 <span class="o">=&gt;</span> /usr/lib/ld-linux.so.2 <span class="o">(</span>0xf7ede000<span class="o">)</span>
+</code></pre></div></div>
 
 <p>Ok so as can be seen this seems like a case of missing interpreter, so we just need the ld-linux.so.2 file.</p>
 
 <p>So just install lib32-glibc.</p>
 
+	<!-- Actual post content ends here -->
 
-<hr><hr>
-<div>
-  
-    <a href="https://nikhildjoshi.github.io/notes/golang" title="PREV: Golang">PREVIOUS : Golang </a>
-  
-<br><br>
-		<a  href="https://nikhildjoshi.github.io" title="Back to Homepage">HOME PAGE</a>
-<br><br>
-	
-</div>
 </article>
 
 		</main>
-		</div>
-<div class="footer">
-  <span class="block">&copy; 2019 Nikhil Joshi</span>
+		<div class="footer">
+  <span class="block">&copy; 2020 Nikhil Joshi</span>
   <span class="block"><small><small>Life is largely random, don't take it too seriously</small></small></span>
 </div>
 
